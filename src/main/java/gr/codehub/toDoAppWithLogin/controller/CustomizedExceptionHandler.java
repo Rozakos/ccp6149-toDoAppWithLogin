@@ -1,7 +1,7 @@
 package gr.codehub.toDoAppWithLogin.controller;
 
 import gr.codehub.toDoAppWithLogin.base.AbstractLogEntity;
-import gr.codehub.toDoAppWithLogin.exception.EmptyItemDescription;
+import gr.codehub.toDoAppWithLogin.exception.EmptyItemDescriptionException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @ControllerAdvice
 public class CustomizedExceptionHandler extends AbstractLogEntity {
-	@ExceptionHandler(EmptyItemDescription.class)
+	@ExceptionHandler(EmptyItemDescriptionException.class)
 	public final String handleAllExceptions(final Exception ex, RedirectAttributes redirectAttributes) throws Exception {
 		logger.error("Attempted to add an item without description. Details: {}.", ex.getMessage());
 		redirectAttributes.addFlashAttribute("isItemDescriptionEmpty", ex.getMessage());
