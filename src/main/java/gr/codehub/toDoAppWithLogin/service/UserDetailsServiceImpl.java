@@ -1,10 +1,10 @@
-package gr.athtech.toDoAppWithLogin.service;
+package gr.codehub.toDoAppWithLogin.service;
 
 
-import gr.athtech.toDoAppWithLogin.model.security.Role;
-import gr.athtech.toDoAppWithLogin.model.security.SessionUser;
-import gr.athtech.toDoAppWithLogin.model.security.User;
-import gr.athtech.toDoAppWithLogin.repository.UserRepository;
+import gr.codehub.toDoAppWithLogin.model.security.Role;
+import gr.codehub.toDoAppWithLogin.model.security.SessionUser;
+import gr.codehub.toDoAppWithLogin.model.security.User;
+import gr.codehub.toDoAppWithLogin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,7 +1,7 @@
-package gr.athtech.toDoAppWithLogin.service;
+package gr.codehub.toDoAppWithLogin.service;
 
-import gr.athtech.toDoAppWithLogin.model.security.SessionUser;
-import gr.athtech.toDoAppWithLogin.model.security.User;
+import gr.codehub.toDoAppWithLogin.model.security.SessionUser;
+import gr.codehub.toDoAppWithLogin.model.security.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -65,11 +65,7 @@ public class SessionService {
      * @return returns true if user is already logged in, false if not
      */
     public boolean isUserLoggedIn(Authentication authentication) {
-        if (authentication instanceof AnonymousAuthenticationToken) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(authentication instanceof AnonymousAuthenticationToken);
     }
 
 

@@ -1,10 +1,10 @@
-package gr.athtech.toDoAppWithLogin.controller;
+package gr.codehub.toDoAppWithLogin.controller;
 
-import gr.athtech.toDoAppWithLogin.ToDoAppWithLoginApplication;
-import gr.athtech.toDoAppWithLogin.model.Item;
-import gr.athtech.toDoAppWithLogin.service.InitiationService;
-import gr.athtech.toDoAppWithLogin.service.ItemService;
-import gr.athtech.toDoAppWithLogin.service.SessionService;
+import gr.codehub.toDoAppWithLogin.ToDoAppWithLoginApplication;
+import gr.codehub.toDoAppWithLogin.model.Item;
+import gr.codehub.toDoAppWithLogin.service.InitiationService;
+import gr.codehub.toDoAppWithLogin.service.ItemService;
+import gr.codehub.toDoAppWithLogin.service.SessionService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

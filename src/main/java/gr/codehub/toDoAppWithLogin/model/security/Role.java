@@ -1,4 +1,4 @@
-package gr.athtech.toDoAppWithLogin.model.security;
+package gr.codehub.toDoAppWithLogin.model.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

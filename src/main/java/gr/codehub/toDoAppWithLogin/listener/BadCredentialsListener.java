@@ -1,4 +1,4 @@
-package gr.athtech.toDoAppWithLogin.listener;
+package gr.codehub.toDoAppWithLogin.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 @Component
 public class BadCredentialsListener implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     /**
      * constructor of this class, correct way to set the autowired attributes

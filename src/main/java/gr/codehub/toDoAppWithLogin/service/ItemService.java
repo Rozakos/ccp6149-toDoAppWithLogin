@@ -1,7 +1,7 @@
-package gr.athtech.toDoAppWithLogin.service;
+package gr.codehub.toDoAppWithLogin.service;
 
-import gr.athtech.toDoAppWithLogin.model.Item;
-import gr.athtech.toDoAppWithLogin.repository.ItemRepository;
+import gr.codehub.toDoAppWithLogin.model.Item;
+import gr.codehub.toDoAppWithLogin.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
