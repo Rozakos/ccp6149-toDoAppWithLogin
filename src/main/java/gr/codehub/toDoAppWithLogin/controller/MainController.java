@@ -51,9 +51,4 @@ public class MainController {
         itemService.deleteItem(id);
         return "redirect:/";
     }
-
-    @GetMapping("/item/find")
-    public String test() {
-        return "test";
-    }
 }
