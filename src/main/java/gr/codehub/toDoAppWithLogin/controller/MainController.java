@@ -1,7 +1,6 @@
 package gr.codehub.toDoAppWithLogin.controller;
 
 import gr.codehub.toDoAppWithLogin.model.Item;
-import gr.codehub.toDoAppWithLogin.service.InitiationService;
 import gr.codehub.toDoAppWithLogin.service.ItemService;
 import gr.codehub.toDoAppWithLogin.service.SessionService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,6 @@ import java.util.List;
 public class MainController {
 
     private final SessionService sessionService;
-    private final InitiationService initiationService;
     private final ItemService itemService;
 
     @GetMapping("/login")

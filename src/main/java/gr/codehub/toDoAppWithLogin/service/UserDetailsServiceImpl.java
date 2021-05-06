@@ -1,6 +1,7 @@
 package gr.codehub.toDoAppWithLogin.service;
 
 
+import gr.codehub.toDoAppWithLogin.base.AbstractLogEntity;
 import gr.codehub.toDoAppWithLogin.model.security.Role;
 import gr.codehub.toDoAppWithLogin.model.security.SessionUser;
 import gr.codehub.toDoAppWithLogin.model.security.User;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl extends AbstractLogEntity implements UserDetailsService {
 
     private final UserRepository userRepository;
 

@@ -1,5 +1,6 @@
 package gr.codehub.toDoAppWithLogin.service;
 
+import gr.codehub.toDoAppWithLogin.base.AbstractLogEntity;
 import gr.codehub.toDoAppWithLogin.model.security.Role;
 import gr.codehub.toDoAppWithLogin.model.security.User;
 import gr.codehub.toDoAppWithLogin.repository.RoleRepository;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InitiationService {
+public class InitiationService extends AbstractLogEntity {
 
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "admin";
@@ -22,7 +23,9 @@ public class InitiationService {
     private final RoleRepository roleRepository;
 
     public void initiateDatabase() {
+        logger.info("Checking if database has been initialiased already");
         if (!userRepository.findFirstByUsername(ADMIN_USERNAME).isPresent()) {
+            logger.info("Database is empty, initiating setup.");
             User user = new User();
             user.setUsername(ADMIN_USERNAME);
             //encrypt password
@@ -43,5 +46,6 @@ public class InitiationService {
             user.setRoles(allRoles);
             userRepository.save(user);
         }
+        logger.info("Database successfully initialised.");
     }
 }

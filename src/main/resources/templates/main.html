@@ -22,17 +22,21 @@
                         <input class="btn btn-outline-primary" type="submit" value="Add ToDo"></input>
                     </div>
                 </div>
+                <small th:if="${isItemDescriptionEmpty}" id="descriptionEmpty" class="form-text text-muted">Item's
+                    description cannot be empty</small>
             </form>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col-12">
             <form method="post" style="margin-bottom: 1.1%" th:action="@{/item/delete}" th:each="item : ${items}"
                   th:if="items != null">
-                <input hidden name="id" th:value="${item.id}">
-                <input disabled name="description" style="border-width:0px;border:none;" th:value="${item.description}">
+                <input hidden name="id" th:value="${item.getId()}">
+                <input disabled name="description" style="border-width:0px;border:none;"
+                       th:value="${item.getDescription()}">
                 <input disabled name="date_created" style="border-width:0px;border:none;"
-                       th:value="${#dates.format(item.date_created, 'dd-MMM-yyyy')}">
+                       th:value="${#dates.format(item.getDate_created(), 'dd-MMM-yyyy')}">
                 <input class="btn btn-danger btn-sm" type="submit" value="Delete">
             </form>
         </div>

@@ -1,5 +1,6 @@
 package gr.codehub.toDoAppWithLogin.service;
 
+import gr.codehub.toDoAppWithLogin.base.AbstractLogEntity;
 import gr.codehub.toDoAppWithLogin.model.security.SessionUser;
 import gr.codehub.toDoAppWithLogin.model.security.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -15,7 +16,7 @@ import java.util.List;
  * service that is associated with the management of the session
  */
 @Service
-public class SessionService {
+public class SessionService extends AbstractLogEntity {
 
     /**
      * this method takes as input a user and a session, and sets user attributes to the existing session
@@ -46,10 +47,12 @@ public class SessionService {
      * @return : returns the highest privilege role that is associated with the user
      */
     private String findRole(SessionUser user) {
+        logger.info("Finding user role.");
         //roles: user OR admin
         List<String> authorityList = new ArrayList<>(user.getAuthorities().size());
         //for each authority, get the String authority (role) and add it to the String list
         user.getAuthorities().forEach(authority -> authorityList.add(authority.getAuthority()));
+        logger.info("User has the following roles: {}", authorityList);
         //since the role-user association is implemented as a ManyToMany relationship,
         // we need to return the highest rank
         if (authorityList.contains("ADMIN"))
