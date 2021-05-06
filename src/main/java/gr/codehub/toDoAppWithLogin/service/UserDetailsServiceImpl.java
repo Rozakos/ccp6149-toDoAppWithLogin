@@ -5,7 +5,7 @@ import gr.codehub.toDoAppWithLogin.model.security.Role;
 import gr.codehub.toDoAppWithLogin.model.security.SessionUser;
 import gr.codehub.toDoAppWithLogin.model.security.User;
 import gr.codehub.toDoAppWithLogin.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,14 +21,10 @@ import java.util.List;
  * Class that manages current user details loading
  */
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    UserRepository userRepository;
-
-    @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     /**
      * searches for user in the repository

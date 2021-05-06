@@ -4,6 +4,7 @@ import gr.codehub.toDoAppWithLogin.model.security.Role;
 import gr.codehub.toDoAppWithLogin.model.security.User;
 import gr.codehub.toDoAppWithLogin.repository.RoleRepository;
 import gr.codehub.toDoAppWithLogin.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class InitiationService {
 
-    static final String ADMIN_USERNAME = "admin";
-    static final String ADMIN_PASSWORD = "admin";
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin";
 
-    UserRepository userRepository;
-    RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public InitiationService(UserRepository userRepository, RoleRepository roleRepository){
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
-
-    public void initiateDatabase(){
+    public void initiateDatabase() {
         if (!userRepository.findFirstByUsername(ADMIN_USERNAME).isPresent()) {
             User user = new User();
             user.setUsername(ADMIN_USERNAME);

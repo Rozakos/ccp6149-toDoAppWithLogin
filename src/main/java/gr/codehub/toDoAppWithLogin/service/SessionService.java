@@ -36,7 +36,7 @@ public class SessionService {
      * @return : returns a User that only contains the Id saved in an attribute of the session
      */
     public User getUserWithSessionId(HttpSession session) {
-        return new User((long) session.getAttribute("userId"));
+        return User.builder().id((long) session.getAttribute("userId")).build();
     }
 
     /**

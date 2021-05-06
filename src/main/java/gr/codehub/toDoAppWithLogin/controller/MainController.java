@@ -1,10 +1,10 @@
 package gr.codehub.toDoAppWithLogin.controller;
 
-import gr.codehub.toDoAppWithLogin.ToDoAppWithLoginApplication;
 import gr.codehub.toDoAppWithLogin.model.Item;
 import gr.codehub.toDoAppWithLogin.service.InitiationService;
 import gr.codehub.toDoAppWithLogin.service.ItemService;
 import gr.codehub.toDoAppWithLogin.service.SessionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,29 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
-    SessionService sessionService;
-    InitiationService initiationService;
-    ItemService itemService;
-
-
-    public MainController(SessionService sessionService, InitiationService initiationService, ItemService itemService) {
-        this.sessionService = sessionService;
-        this.initiationService = initiationService;
-        this.itemService = itemService;
-    }
+    private final SessionService sessionService;
+    private final InitiationService initiationService;
+    private final ItemService itemService;
 
     @GetMapping("/login")
     public String login() {
-        boolean loggedIn;
-
-        if(ToDoAppWithLoginApplication.isFirstTime()) {
-            initiationService.initiateDatabase();
-            ToDoAppWithLoginApplication.setFirstTime(false);
-        }
-
-        loggedIn = sessionService.isUserLoggedIn(SecurityContextHolder.getContext().getAuthentication());
+        boolean loggedIn = sessionService.isUserLoggedIn(SecurityContextHolder.getContext().getAuthentication());
         if (loggedIn) {
             /* The user is logged in */
             return "redirect:/";

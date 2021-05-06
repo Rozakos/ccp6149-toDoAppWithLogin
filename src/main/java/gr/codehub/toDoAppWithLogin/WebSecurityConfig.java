@@ -1,6 +1,7 @@
 package gr.codehub.toDoAppWithLogin;
 
 import gr.codehub.toDoAppWithLogin.service.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,24 +16,15 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * Class that configures the way each user should be treated, depending on the URL they request
  */
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    UserDetailsServiceImpl userDetailsServiceImpl;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
     //Array instance that includes all the paths that need to be accessed by all users
     String[] resources = new String[]{
             "/include/**", "/css/**", "/icons/**", "/images/**", "/js/**", "/layer/**"
     };
-
-    /**
-     * constructor of this class, correct way to set the autowired attributes
-     *
-     * @param userDetailsServiceImpl: instance of a class that configures how a user should be loaded
-     */
-    @Autowired
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsServiceImpl) {
-        this.userDetailsServiceImpl = userDetailsServiceImpl;
-    }
 
     /**
      * configures how each user request should be treated, and manages the login of the system

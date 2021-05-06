@@ -1,6 +1,6 @@
 package gr.codehub.toDoAppWithLogin.listener;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.stereotype.Component;
@@ -13,19 +13,10 @@ import javax.servlet.http.HttpSession;
  * login and passing it to the redirection towards the login page
  */
 @Component
+@RequiredArgsConstructor
 public class BadCredentialsListener implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     private final HttpServletRequest request;
-
-    /**
-     * constructor of this class, correct way to set the autowired attributes
-     *
-     * @param request: the http request received from a user
-     */
-    @Autowired
-    public BadCredentialsListener(HttpServletRequest request) {
-        this.request = request;
-    }
 
     /**
      * this method listens for application events, and specifically for bad credentials requests

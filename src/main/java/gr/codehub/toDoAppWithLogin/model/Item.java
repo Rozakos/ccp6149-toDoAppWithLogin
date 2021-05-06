@@ -1,8 +1,8 @@
 package gr.codehub.toDoAppWithLogin.model;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +11,9 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Item {
 
     @Id
@@ -22,9 +22,4 @@ public class Item {
 
     private String description;
     private Date date_created;
-
-    public Item(String description) {
-        this.description = description;
-        date_created = new Date();
-    }
 }
