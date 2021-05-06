@@ -21,3 +21,4 @@ target/
 Dockerfile
 .gitignore
 pom.xml
+/logs/application-logs.log

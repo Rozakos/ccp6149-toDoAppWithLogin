@@ -24,7 +24,7 @@ public class ItemService extends AbstractLogEntity {
     public void addItem(String description) {
         logger.info("Attempting to add item.");
         if (description.isEmpty()) {
-            throw new EmptyItemDescription("Item's description is empty");
+            throw new EmptyItemDescription("Item's description cannot be empty");
         }
         itemRepository.save(Item.builder().description(description).date_created(new Date()).build());
         logger.info("Item added.");

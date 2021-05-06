@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CustomizedExceptionHandler extends AbstractLogEntity {
 	@ExceptionHandler(EmptyItemDescription.class)
 	public final String handleAllExceptions(final Exception ex, RedirectAttributes redirectAttributes) throws Exception {
-		logger.warn("Attempted to add an item without description. Details: {}.", ex.getMessage());
-		redirectAttributes.addFlashAttribute("isItemDescriptionEmpty", true);
+		logger.error("Attempted to add an item without description. Details: {}.", ex.getMessage());
+		redirectAttributes.addFlashAttribute("isItemDescriptionEmpty", ex.getMessage());
 		return "redirect:/";
 	}
 }
