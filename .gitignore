@@ -19,6 +19,4 @@ target/
 *.iml
 *.ipr
 Dockerfile
-.gitignore
-pom.xml
-/logs/application-logs.log
+logs/
