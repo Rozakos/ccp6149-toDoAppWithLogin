@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /usr/src/app
 
 # Copy the JAR file from your build context to the container's working directory
-COPY first_job/target/oDoAppWithLogin.jar ./app.jar
+COPY first_job/target/ToDoAppWithLogin.jar ./app.jar
 
 # Specify the port number the container should expose
 EXPOSE 8080
