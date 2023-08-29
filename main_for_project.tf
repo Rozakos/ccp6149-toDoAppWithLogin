@@ -25,6 +25,18 @@ variable "client_secret" {
   sensitive   = true
 }
 
+variable "prefix" {
+  description = "Prefix for naming resources"
+  type        = string
+}
+
+variable "location" {
+  description = "Azure region for the resources"
+  type        = string
+  default     = "East US"  # Example default value, you can change it or remove the default entirely.
+}
+
+
 # Outputs
 output "resource_group_name" {
   value       = azurerm_resource_group.main.name
