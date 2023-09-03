@@ -13,7 +13,7 @@ provider "azurerm" {
   features {}
 }
 
-# Variables
+# Define Variables
 variable "client_id" {
   description = "The Azure AD Application Client ID"
   type        = string
@@ -33,9 +33,8 @@ variable "prefix" {
 variable "location" {
   description = "Azure region for the resources"
   type        = string
-  default     = "East US"  # Example default value, you can change it or remove the default entirely.
+  default     = "East US"
 }
-
 
 # Outputs
 output "resource_group_name" {
@@ -45,16 +44,15 @@ output "resource_group_name" {
 
 output "public_ip_address" {
   value       = azurerm_public_ip.public_ip.ip_address
-  description = "Output the assigned public IP address of the newly created VM"
+  description = "Public IP of VM"
 }
 
-# Create resource group
+# Resources
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-Group"
   location = var.location
 }
 
-# Create virtual network
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-VirtualNetwork"
   address_space       = ["10.0.0.0/16"]
@@ -62,7 +60,6 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = azurerm_resource_group.main.name
 }
 
-# Network security group
 resource "azurerm_network_security_group" "main" {
   name                = "${var.prefix}-NetSecurityGroup"
   location            = var.location
@@ -111,7 +108,6 @@ resource "azurerm_public_ip" "public_ip" {
   allocation_method   = "Static"
 }
 
-# Network interface
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
   location            = var.location
@@ -125,7 +121,6 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
-# Virtual Machine / OS Disk
 resource "azurerm_virtual_machine" "main" {
   name                  = "${var.prefix}-Jenkins-vm"
   location              = var.location
@@ -138,8 +133,8 @@ resource "azurerm_virtual_machine" "main" {
   storage_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04-lts"
-    version   = "20.04.202010140"
+    sku       = "22_04-lts"
+    version   = "latest"
   }
 
   storage_os_disk {
@@ -151,8 +146,8 @@ resource "azurerm_virtual_machine" "main" {
 
   os_profile {
     computer_name  = "hostname"
-    admin_username = "vmadmin"
-    admin_password = "AthT3chDevOps!"
+    admin_username = JenkinsCredentials('AZ_USERNAME')
+    admin_password = JenkinsCredentials('AZ_PASSWORD')
   }
 
   os_profile_linux_config {
@@ -166,32 +161,6 @@ resource "azurerm_virtual_machine" "main" {
   provisioner "file" {
     connection {
       type     = "ssh"
-      user     = "vmadmin"
-      password = "AthT3chDevOps!"
-      host     = azurerm_public_ip.public_ip.ip_address
-    }
-
-    source      = "${path.module}/JenkinsGitInstallationVM.sh"
-    destination = "/home/vmadmin/JenkinsGitInstallationVM.sh"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "vmadmin"
-      password = "AthT3chDevOps!"
-      host     = azurerm_public_ip.public_ip.ip_address
-    }
-
-    inline = [
-      "ls -a",
-      "mkdir thiswascreatedusingtf",
-      "sudo chmod +x JenkinsGitInstallationVM.sh",
-      "sudo ./JenkinsGitInstallationVM.sh"
-    ]
-  }
-
-  provisioner "local-exec" {
-    command = "echo ${azurerm_public_ip.public_ip.ip_address} > publicip.txt"
-  }
-}
+      user     = JenkinsCredentials('AZ_USERNAME')
+      password = JenkinsCredentials('AZ_PASSWORD')
+      host     = azurerm_public_ip
